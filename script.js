@@ -198,7 +198,7 @@ function fireConfetti() {
 }
 
 // --- 5. Interactive Click Effects ---
-const avatarImages = ['avatar_happy.png', 'avatar_heart.png', 'avatar_shy.png'];
+const avatarImages = ['new_avatar_happy.png', 'new_avatar_heart.png', 'new_avatar_shy.png'];
 document.addEventListener('click', (e) => {
     // Ignore clicks on buttons, windows, and characters
     if (e.target.closest('button') || e.target.closest('.retro-window') || e.target.closest('.char-container') || e.target.closest('#hug-overlay')) return;
@@ -427,7 +427,7 @@ function runTourSequence() {
             typeGuideLine("Hey! Wait, don't scroll away! 💕", () => {
                 
                 // Step 2: Next line
-                guideImg.src = 'avatar_shy.png';
+                guideImg.src = 'new_avatar_shy.png';
                 typeGuideLine("I have something important to tell you...", () => {
                     
                     // Step 3: Move to music widget
@@ -436,7 +436,7 @@ function runTourSequence() {
                     setTimeout(() => {
                         musicWidgetEl.style.opacity = '1';
                         musicWidgetEl.style.pointerEvents = 'auto';
-                        guideImg.src = 'avatar_happy.png';
+                        guideImg.src = 'new_avatar_happy.png';
                         typeGuideLine("But first... setting the mood. 🎵", () => {
                             
                             // Step 4: Move to center
@@ -450,7 +450,7 @@ function runTourSequence() {
                                     guideContainer.style.left = '10%';
                                     mainWindow.style.opacity = '1';
                                     mainWindow.style.pointerEvents = 'auto';
-                                    guideImg.src = 'avatar_heart.png';
+                                    guideImg.src = 'new_avatar_heart.png';
                                     typeGuideLine("Will you be my Player 2? 💖", () => {
                                         // Done! Let the user interact with YES/NO
                                     });
