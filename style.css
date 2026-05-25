@@ -131,16 +131,14 @@
             width: auto;
             /* Sticker Outline Effect */
             filter: drop-shadow(0 5px 10px rgba(0,0,0,0.4)) drop-shadow(0 0 2px white) drop-shadow(0 0 2px white);
-            animation: swayDance 2s ease-in-out infinite;
+            animation: breatheFloat 4s ease-in-out infinite;
             display: block;
             transform-origin: bottom center;
         }
 
-
-
-        @keyframes swayDance {
-            0%, 100% { transform: rotate(-5deg) scale(1); }
-            50% { transform: rotate(5deg) scale(1.05) translateY(-5px); }
+        @keyframes breatheFloat {
+            0%, 100% { transform: translateY(0) scaleX(1) scaleY(1); }
+            50% { transform: translateY(-8px) scaleX(1.02) scaleY(0.98); }
         }
 
 

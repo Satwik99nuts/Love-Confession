@@ -391,7 +391,7 @@ btnClose.addEventListener('click', (e) => {
     }, 2000);
 });
 
-// --- 9. GUIDED TOUR SEQUENCE ---
+// --- 9. GUIDED TOUR SEQUENCE & MUSIC ---
 const guideContainer = document.getElementById('guide-avatar-container');
 const guideBubble = document.getElementById('guide-speech-bubble');
 const guideImg = document.getElementById('guide-img');
@@ -418,9 +418,10 @@ function typeGuideLine(line, callback) {
 }
 
 function runTourSequence() {
-    // Step 1: Slide in
+    // Step 1: Slide in with surprised look
     setTimeout(() => {
         guideContainer.style.transform = 'translate(0, 0)';
+        guideImg.src = 'new_avatar_surprised.png';
         guideImg.classList.add('jump-anim');
         setTimeout(() => {
             guideImg.classList.remove('jump-anim');
@@ -436,13 +437,14 @@ function runTourSequence() {
                     setTimeout(() => {
                         musicWidgetEl.style.opacity = '1';
                         musicWidgetEl.style.pointerEvents = 'auto';
-                        guideImg.src = 'new_avatar_happy.png';
+                        guideImg.src = 'new_avatar_wink.png';
                         typeGuideLine("But first... setting the mood. 🎵", () => {
                             
                             // Step 4: Move to center
                             guideContainer.style.top = '40%';
                             guideContainer.style.left = '40%';
                             setTimeout(() => {
+                                guideImg.src = 'new_avatar_happy.png';
                                 typeGuideLine("Okay, here goes nothing...", () => {
                                     
                                     // Step 5: Reveal confession
@@ -464,17 +466,72 @@ function runTourSequence() {
     }, 1000);
 }
 
-// Start tour
-const startOverlay = document.getElementById('start-overlay');
-const bgMusic = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3');
+// MUSIC CONTROLS
+const tracks = [
+    { name: "Romantic_Piano.mp3", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3" },
+    { name: "Lofi_Beats.mp3", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3" },
+    { name: "Acoustic_Love.mp3", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" }
+];
+let currentTrackIndex = 0;
+const bgMusic = new Audio(tracks[currentTrackIndex].url);
 bgMusic.loop = true;
 bgMusic.volume = 0.4;
 
+const btnPrev = document.getElementById('btn-prev');
+const btnNext = document.getElementById('btn-next');
+const btnPlayPause = document.getElementById('btn-playpause');
+const playIcon = document.getElementById('play-icon');
+const trackNameDisplay = document.getElementById('track-name-display');
+const recordSpin = document.getElementById('record-spin');
+
+function updatePlayerUI() {
+    trackNameDisplay.innerText = tracks[currentTrackIndex].name;
+    if (bgMusic.paused) {
+        playIcon.classList.remove('ph-pause-circle');
+        playIcon.classList.add('ph-play-circle');
+        recordSpin.style.animationPlayState = 'paused';
+    } else {
+        playIcon.classList.remove('ph-play-circle');
+        playIcon.classList.add('ph-pause-circle');
+        recordSpin.style.animationPlayState = 'running';
+    }
+}
+
+function playTrack(index) {
+    currentTrackIndex = index;
+    bgMusic.src = tracks[currentTrackIndex].url;
+    bgMusic.play().then(() => updatePlayerUI()).catch(e => console.log("Audio block", e));
+}
+
+btnPrev.addEventListener('click', (e) => {
+    e.stopPropagation();
+    let newIndex = currentTrackIndex - 1;
+    if (newIndex < 0) newIndex = tracks.length - 1;
+    playTrack(newIndex);
+});
+
+btnNext.addEventListener('click', (e) => {
+    e.stopPropagation();
+    let newIndex = (currentTrackIndex + 1) % tracks.length;
+    playTrack(newIndex);
+});
+
+btnPlayPause.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (bgMusic.paused) {
+        bgMusic.play().then(() => updatePlayerUI());
+    } else {
+        bgMusic.pause();
+        updatePlayerUI();
+    }
+});
+
+const startOverlay = document.getElementById('start-overlay');
 startOverlay.addEventListener('click', () => {
     startOverlay.style.opacity = '0';
     setTimeout(() => {
         startOverlay.style.display = 'none';
-        bgMusic.play().catch(e => console.log("Audio playback blocked: ", e));
+        bgMusic.play().then(() => updatePlayerUI()).catch(e => console.log("Audio playback blocked: ", e));
         setTimeout(runTourSequence, 500); // Start tour after overlay fades
     }, 1000);
 });

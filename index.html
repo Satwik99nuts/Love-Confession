@@ -40,27 +40,29 @@
     <div class="sticker-decor top-1/2 left-5 text-4xl opacity-90" style="--r: 20deg; animation-delay: 2s;">🥛</div>
     <div class="sticker-decor top-20 right-1/3 text-5xl opacity-80" style="--r: -5deg; animation-delay: 1.5s;">💌</div>
 
-    <!-- Music Player Widget -->
-    <div id="widget-music" class="retro-window absolute w-60 right-8 top-8 cursor-move z-40 transition-opacity duration-1000" style="transform: rotate(2deg); opacity: 0; pointer-events: none;">
+    <!-- 90s Music Player Widget -->
+    <div id="widget-music" class="retro-window w-64 top-8 right-8 z-[100] cursor-grab opacity-0 pointer-events-none transition-opacity duration-1000">
         <div class="title-bar">
-            <span>@it_s_me_satwik</span>
-            <div class="flex gap-1">
-                <div class="w-2 h-2 bg-yellow-400 rounded-full border border-black"></div>
-                <div class="w-2 h-2 bg-red-400 rounded-full border border-black"></div>
+            <span>Music_Player.exe</span>
+            <div class="flex gap-2">
+                <i class="ph-bold ph-minus hover:text-gray-200 cursor-pointer"></i>
+                <i class="ph-bold ph-x hover:text-red-200 cursor-pointer"></i>
             </div>
         </div>
-        <div class="p-3 bg-[#1e1e1e]">
-            <div class="text-[#7afcff] font-mono text-xs mb-2">♪ Now Playing: Aval 💖</div>
-            <div class="h-8 bg-black/50 rounded flex items-end justify-center gap-1 p-1 mb-2">
-                <div class="w-2 bg-pink-400 animate-[equalize_0.8s_infinite] h-full"></div>
-                <div class="w-2 bg-purple-400 animate-[equalize_1.2s_infinite] h-1/2"></div>
-                <div class="w-2 bg-blue-400 animate-[equalize_0.6s_infinite] h-3/4"></div>
-                <div class="w-2 bg-pink-400 animate-[equalize_1.0s_infinite] h-1/4"></div>
+        <div class="p-4 bg-[#2b1055] text-white">
+            <div class="flex items-center gap-4 mb-4">
+                <div id="record-spin" class="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center animate-spin" style="animation-duration: 3s;">
+                    <i class="ph-fill ph-music-notes text-2xl text-white"></i>
+                </div>
+                <div class="overflow-hidden whitespace-nowrap w-full">
+                    <p class="font-bold text-sm text-pink-300 animate-[pulse_2s_infinite]">Now Playing:</p>
+                    <p id="track-name-display" class="text-xs marquee-text">Romantic_Piano.mp3</p>
+                </div>
             </div>
-            <div class="flex justify-around text-white text-lg">
-                <i class="ph-fill ph-skip-back hover:text-pink-400"></i>
-                <i class="ph-fill ph-play-circle hover:text-pink-400 text-xl"></i>
-                <i class="ph-fill ph-skip-forward hover:text-pink-400"></i>
+            <div class="flex justify-between items-center bg-black/30 p-2 rounded-lg">
+                <button id="btn-prev" class="hover:text-pink-400 transition-colors"><i class="ph-fill ph-skip-back text-xl"></i></button>
+                <button id="btn-playpause" class="hover:scale-110 transition-transform"><i id="play-icon" class="ph-fill ph-pause-circle text-4xl text-pink-500 hover:text-pink-400"></i></button>
+                <button id="btn-next" class="hover:text-pink-400 transition-colors"><i class="ph-fill ph-skip-forward text-xl"></i></button>
             </div>
         </div>
     </div>
