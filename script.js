@@ -227,3 +227,87 @@ document.querySelectorAll('.char-container').forEach(char => {
         setTimeout(() => char.classList.remove('jump-anim'), 500);
     });
 });
+
+// --- 6. Flirty Text Cycler ---
+const flirtyLines = [
+    "> Are you a keyboard? Because you're exactly my type. ⌨️",
+    "> I must be lagging, because my heart just skipped a beat. 💓",
+    "> Do you believe in love at first click? 🖱️",
+    "> Will you be the CSS to my HTML? 🎨",
+    "> You must be a loop, because I can't stop thinking about you. 🔁",
+    "> Are you an API? Because I want to connect with you. 🔗"
+];
+let flirtyIndex = 0;
+const flirtyEl = document.getElementById('flirty-text');
+
+function typeLine(line, callback) {
+    let i = 0;
+    flirtyEl.innerText = "> ";
+    const interval = setInterval(() => {
+        flirtyEl.innerText += line.charAt(i);
+        i++;
+        if (i >= line.length) {
+            clearInterval(interval);
+            setTimeout(callback, 3000); // Wait 3 seconds before next line
+        }
+    }, 50); // Typing speed
+}
+
+function cycleFlirtyText() {
+    const line = flirtyLines[flirtyIndex].replace("> ", "");
+    typeLine(line, () => {
+        flirtyIndex = (flirtyIndex + 1) % flirtyLines.length;
+        cycleFlirtyText();
+    });
+}
+if(flirtyEl) setTimeout(cycleFlirtyText, 2000); // Start after 2 seconds
+
+// --- 7. Speech Bubbles & Automated Avatar Rain ---
+const bubbleBoy = document.getElementById('bubble-boy');
+const bubbleGirl = document.getElementById('bubble-girl');
+const boyLines = ["You're cute!", "I love you!", "Notice me 🥺"];
+const girlLines = ["No, you! 💖", "Aww!", "Hehe 🥰"];
+
+setInterval(() => {
+    // Randomly show bubbles
+    if (Math.random() > 0.5) {
+        if(bubbleBoy) {
+            bubbleBoy.innerText = boyLines[Math.floor(Math.random() * boyLines.length)];
+            bubbleBoy.classList.remove('hidden');
+            bubbleBoy.classList.add('pop-in');
+            setTimeout(() => {
+                bubbleBoy.classList.add('hidden');
+                bubbleBoy.classList.remove('pop-in');
+            }, 3000);
+        }
+    } else {
+        if(bubbleGirl) {
+            bubbleGirl.innerText = girlLines[Math.floor(Math.random() * girlLines.length)];
+            bubbleGirl.classList.remove('hidden');
+            bubbleGirl.classList.add('pop-in');
+            setTimeout(() => {
+                bubbleGirl.classList.add('hidden');
+                bubbleGirl.classList.remove('pop-in');
+            }, 3000);
+        }
+    }
+}, 5000);
+
+// Automated Avatar Rain
+setInterval(() => {
+    const el = document.createElement('img');
+    el.src = avatarImages[Math.floor(Math.random() * avatarImages.length)];
+    el.style.position = 'fixed';
+    el.style.left = (Math.random() * window.innerWidth) + 'px';
+    el.style.top = window.innerHeight + 'px'; // Start from bottom
+    el.style.width = (Math.random() * 20 + 20) + 'px'; // random size
+    el.style.height = el.style.width;
+    el.style.pointerEvents = 'none';
+    el.style.zIndex = 0; // Behind main window
+    document.body.appendChild(el);
+    
+    el.animate([
+        { transform: 'translateY(0) rotate(0deg)', opacity: 0.5 },
+        { transform: `translateY(-${window.innerHeight + 100}px) rotate(${Math.random()*360}deg)`, opacity: 0 }
+    ], { duration: Math.random() * 3000 + 4000, easing: 'linear' }).onfinish = () => el.remove();
+}, 800); // Spawn a new avatar every 800ms
