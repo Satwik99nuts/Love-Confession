@@ -465,4 +465,16 @@ function runTourSequence() {
 }
 
 // Start tour
-setTimeout(runTourSequence, 1000);
+const startOverlay = document.getElementById('start-overlay');
+const bgMusic = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3');
+bgMusic.loop = true;
+bgMusic.volume = 0.4;
+
+startOverlay.addEventListener('click', () => {
+    startOverlay.style.opacity = '0';
+    setTimeout(() => {
+        startOverlay.style.display = 'none';
+        bgMusic.play().catch(e => console.log("Audio playback blocked: ", e));
+        setTimeout(runTourSequence, 500); // Start tour after overlay fades
+    }, 1000);
+});

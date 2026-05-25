@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Together Forever? 💖</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Baloo+Thambi+2:wght@400;600;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="h-screen w-screen flex items-center justify-center relative">
+<body class="h-screen w-screen flex items-center justify-center relative font-['Playfair_Display'] bg-pink-50">
+
+    <!-- Tap to Start Overlay -->
+    <div id="start-overlay" class="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-black/90 text-white cursor-pointer transition-opacity duration-1000">
+        <i class="ph-fill ph-heart text-6xl text-pink-500 animate-pulse mb-4"></i>
+        <p class="font-['Playfair_Display'] text-2xl">Tap to begin</p>
+    </div>
 
     <!-- Preloader for GIFs (HIDDEN - only for preloading) -->
     <div style="position: absolute; width: 0; height: 0; overflow: hidden; opacity: 0;">
@@ -78,12 +84,12 @@
 
             <div id="char-boy" class="char-container center-8">
                 <div class="speech-bubble bubble-left hidden" id="bubble-boy"></div>
-                <img id="boy-img" src="Screenshot 2025-11-25 113243.png" alt="Cute Bear">
+                <img id="boy-img" src="new_avatar_heart.png" alt="Boy Avatar" class="w-16 h-16 object-contain">
             </div>
 
             <div id="char-girl" class="char-container right-8">
                 <div class="speech-bubble bubble-right hidden" id="bubble-girl"></div>
-                <img id="girl-img" src="https://media.tenor.com/71e-Dvs2fH0AAAAi/milk-and-mocha-cute.gif" alt="Cute Panda">
+                <img id="girl-img" src="female_avatar.png" alt="Girl Avatar" class="w-16 h-16 object-contain">
             </div>
 
             <div class="absolute top-4 right-10 text-xl animate-pulse">✨</div>
@@ -91,15 +97,15 @@
         </div>
 
         <div class="dialogue-box">
-            <div class="absolute -top-3 left-4 bg-pink-500 text-white text-[10px] font-bold px-2 py-1 rounded border-2 border-black font-press-start shadow-md">
-                MILK_BEAR
+            <div class="absolute -top-3 left-4 bg-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full border border-pink-700 shadow-md">
+                @it_s_me_satwik
             </div>
 
-            <h1 class="text-2xl md:text-3xl font-bold mt-2 text-pink-600">
-                 Will you be my Player 2? 🎮
+            <h1 class="text-3xl md:text-4xl font-bold mt-2 text-pink-700 font-['Playfair_Display']">
+                 Will you be my Player 2? 💖
             </h1>
             
-            <p id="flirty-text" class="text-gray-500 text-xs font-mono my-3 border-r-2 border-orange-400 pr-1 h-4 inline-block">
+            <p id="flirty-text" class="text-pink-500 text-xl font-['Caveat'] my-3 border-r-2 border-pink-400 pr-1 inline-block">
                 >  I am waiting for you...
             </p>
 
@@ -122,18 +128,19 @@
 
     <!-- VIRTUAL HUG OVERLAY -->
     <div id="hug-overlay">
-        <img src="milk-bear-7680x4320-10574.png" 
-             alt="Milk Bear with Heart" 
-             class="w-72 h-auto mb-6 drop-shadow-[0_0_20px_rgba(255,105,180,0.8)] rounded-lg animate-bounce">
+        <img src="new_avatar_heart.png" 
+             alt="Happy Avatar" 
+             class="w-48 h-48 object-contain mb-6 drop-shadow-[0_0_20px_rgba(255,105,180,0.8)] rounded-lg animate-bounce">
+        <img src="female_avatar.png" 
+             alt="Happy Female Avatar" 
+             class="w-48 h-48 object-contain mb-6 drop-shadow-[0_0_20px_rgba(255,105,180,0.8)] rounded-lg animate-bounce">
         
-        <h1 class="text-white font-press-start text-center text-2xl leading-relaxed drop-shadow-lg">
-            <span class="text-pink-400 text-4xl block mb-4 animate-bounce">YAY!</span>
-            SENDING HUGS! 💖
+        <h1 class="text-white font-['Playfair_Display'] text-center text-4xl leading-relaxed drop-shadow-lg">
+            <span class="text-pink-300 text-6xl block mb-4 animate-bounce font-['Caveat']">YAY!</span>
+            I LOVE YOU! 💖
         </h1>
         
-        <p class="text-blue-200 mt-4 font-mono text-sm">Restarting love story...</p>
-        
-        <button onclick="location.reload()" class="mt-8 btn-pixel bg-white text-black px-6 py-3 hover:bg-gray-200 border-2 border-pink-500 rounded">
+        <button onclick="location.reload()" class="mt-8 bg-white text-pink-600 font-bold px-8 py-3 hover:bg-pink-100 rounded-full shadow-lg transition-transform hover:scale-105">
             Play Again?
         </button>
     </div>

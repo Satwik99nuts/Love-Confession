@@ -30,31 +30,28 @@
 
         /* --- 5D Diorama Window --- */
         .retro-window {
-            background: rgba(255, 240, 245, 0.95);
-            border: 3px solid var(--accent-pink);
-            box-shadow: 
-                0 20px 50px rgba(0,0,0,0.5),
-                0 0 0 4px rgba(255, 126, 179, 0.3);
-            border-radius: 16px;
+            background: rgba(255, 250, 252, 0.95);
+            border: 1px solid rgba(255, 126, 179, 0.5);
+            box-shadow: 0 10px 30px rgba(255, 126, 179, 0.2);
+            border-radius: 20px;
             overflow: hidden;
             position: absolute;
             transform-style: preserve-3d;
             transition: transform 0.2s ease-out;
         }
 
-
-
         .title-bar {
-            background: linear-gradient(90deg, #ff758c, #ff7eb3);
-            color: white;
-            padding: 8px 12px;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 10px;
+            background: linear-gradient(90deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            color: #d63384;
+            padding: 10px 15px;
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: bold;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: grab;
-            border-bottom: 3px solid #e06595;
+            border-bottom: 1px solid rgba(255, 126, 179, 0.3);
             z-index: 50;
             position: relative;
             user-select: none;
@@ -182,17 +179,18 @@
 
 
         .btn-pixel {
-            font-family: 'Press Start 2P', cursive;
-            text-transform: uppercase;
-            border: 2px solid #000;
-            box-shadow: 4px 4px 0px #000;
-            transition: transform 0.1s, box-shadow 0.1s;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            border-radius: 999px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 126, 179, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
             position: relative;
             overflow: hidden;
         }
         .btn-pixel:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px #000;
+            transform: translateY(2px);
+            box-shadow: 0 2px 5px rgba(255, 126, 179, 0.4);
         }
 
 
@@ -264,23 +262,34 @@
             .char-container img {
                 height: 100px;
             }
+            
+            #guide-img {
+                width: 5rem !important;
+                height: 5rem !important;
+            }
+            
+            #guide-speech-bubble {
+                font-size: 14px !important;
+                max-width: 150px !important;
+                top: -50px !important;
+            }
         }
 
         /* --- Speech Bubbles --- */
         .speech-bubble {
             position: absolute;
             background: white;
-            border: 2px solid var(--accent-pink);
-            border-radius: 12px;
-            padding: 6px 10px;
-            font-size: 12px;
+            border: 1px solid var(--accent-pink);
+            border-radius: 20px;
+            padding: 8px 14px;
+            font-size: 20px;
             color: #d63384;
             font-weight: bold;
             z-index: 20;
-            box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(255, 126, 179, 0.3);
             white-space: nowrap;
-            top: -40px;
-            font-family: 'Baloo Thambi 2', cursive;
+            top: -50px;
+            font-family: 'Caveat', cursive;
         }
         .bubble-left { left: -10px; }
         .bubble-right { right: -10px; }
