@@ -311,3 +311,82 @@ setInterval(() => {
         { transform: `translateY(-${window.innerHeight + 100}px) rotate(${Math.random()*360}deg)`, opacity: 0 }
     ], { duration: Math.random() * 3000 + 4000, easing: 'linear' }).onfinish = () => el.remove();
 }, 800); // Spawn a new avatar every 800ms
+
+// --- 8. Title Bar Interactions ---
+const btnMinimize = document.getElementById('btn-minimize');
+const btnMaximize = document.getElementById('btn-maximize');
+const btnClose = document.getElementById('btn-close');
+const contentStage = mainWindow.querySelector('.char-stage');
+const contentDialogue = mainWindow.querySelector('.dialogue-box');
+
+let isMinimized = false;
+btnMinimize.addEventListener('click', (e) => {
+    e.stopPropagation();
+    isMinimized = !isMinimized;
+    if (isMinimized) {
+        contentStage.style.display = 'none';
+        contentDialogue.style.display = 'none';
+        mainWindow.style.top = 'auto';
+        mainWindow.style.bottom = '20px';
+        mainWindow.style.left = '20px';
+        mainWindow.style.transform = 'none';
+    } else {
+        contentStage.style.display = 'block';
+        contentDialogue.style.display = 'block';
+        mainWindow.style.top = '50%';
+        mainWindow.style.left = '50%';
+        mainWindow.style.transform = 'translate(-50%, -50%)';
+        mainWindow.style.bottom = 'auto';
+    }
+});
+
+let isMaximized = false;
+btnMaximize.addEventListener('click', (e) => {
+    e.stopPropagation();
+    isMaximized = !isMaximized;
+    if (isMaximized) {
+        mainWindow.style.width = '100vw';
+        mainWindow.style.height = '100vh';
+        mainWindow.style.maxWidth = '100vw';
+        mainWindow.style.borderRadius = '0';
+        mainWindow.style.top = '0';
+        mainWindow.style.left = '0';
+        mainWindow.style.transform = 'none';
+    } else {
+        mainWindow.style.width = '90%';
+        mainWindow.style.height = 'auto';
+        mainWindow.style.maxWidth = '500px';
+        mainWindow.style.borderRadius = '16px';
+        mainWindow.style.top = '50%';
+        mainWindow.style.left = '50%';
+        mainWindow.style.transform = 'translate(-50%, -50%)';
+    }
+});
+
+btnClose.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mainWindow.classList.remove('shake-anim');
+    void mainWindow.offsetWidth; // trigger reflow
+    mainWindow.classList.add('shake-anim');
+    
+    const teaseText = document.createElement('div');
+    teaseText.innerText = "You can't escape my love! 💖";
+    teaseText.style.position = 'absolute';
+    teaseText.style.top = '-35px';
+    teaseText.style.right = '0';
+    teaseText.style.background = '#ff7eb3';
+    teaseText.style.color = 'white';
+    teaseText.style.padding = '5px 10px';
+    teaseText.style.borderRadius = '8px';
+    teaseText.style.fontSize = '12px';
+    teaseText.style.fontWeight = 'bold';
+    teaseText.style.zIndex = '100';
+    teaseText.style.whiteSpace = 'nowrap';
+    teaseText.style.animation = 'popIn 0.3s forwards';
+    
+    document.querySelector('.title-bar').appendChild(teaseText);
+    
+    setTimeout(() => {
+        teaseText.remove();
+    }, 2000);
+});
