@@ -390,3 +390,79 @@ btnClose.addEventListener('click', (e) => {
         teaseText.remove();
     }, 2000);
 });
+
+// --- 9. GUIDED TOUR SEQUENCE ---
+const guideContainer = document.getElementById('guide-avatar-container');
+const guideBubble = document.getElementById('guide-speech-bubble');
+const guideImg = document.getElementById('guide-img');
+const musicWidgetEl = document.getElementById('widget-music');
+
+function typeGuideLine(line, callback) {
+    let i = 0;
+    guideBubble.innerText = "";
+    guideBubble.classList.remove('hidden');
+    guideBubble.classList.add('pop-in');
+    
+    const interval = setInterval(() => {
+        guideBubble.innerText += line.charAt(i);
+        i++;
+        if (i >= line.length) {
+            clearInterval(interval);
+            setTimeout(() => {
+                guideBubble.classList.remove('pop-in');
+                guideBubble.classList.add('hidden');
+                if(callback) callback();
+            }, 3000); // Wait 3 seconds before next action
+        }
+    }, 50); 
+}
+
+function runTourSequence() {
+    // Step 1: Slide in
+    setTimeout(() => {
+        guideContainer.style.transform = 'translate(0, 0)';
+        guideImg.classList.add('jump-anim');
+        setTimeout(() => {
+            guideImg.classList.remove('jump-anim');
+            typeGuideLine("Hey! Wait, don't scroll away! 💕", () => {
+                
+                // Step 2: Next line
+                guideImg.src = 'avatar_shy.png';
+                typeGuideLine("I have something important to tell you...", () => {
+                    
+                    // Step 3: Move to music widget
+                    guideContainer.style.top = '10%';
+                    guideContainer.style.left = '60%';
+                    setTimeout(() => {
+                        musicWidgetEl.style.opacity = '1';
+                        musicWidgetEl.style.pointerEvents = 'auto';
+                        guideImg.src = 'avatar_happy.png';
+                        typeGuideLine("But first... setting the mood. 🎵", () => {
+                            
+                            // Step 4: Move to center
+                            guideContainer.style.top = '40%';
+                            guideContainer.style.left = '40%';
+                            setTimeout(() => {
+                                typeGuideLine("Okay, here goes nothing...", () => {
+                                    
+                                    // Step 5: Reveal confession
+                                    guideContainer.style.top = '20%';
+                                    guideContainer.style.left = '10%';
+                                    mainWindow.style.opacity = '1';
+                                    mainWindow.style.pointerEvents = 'auto';
+                                    guideImg.src = 'avatar_heart.png';
+                                    typeGuideLine("Will you be my Player 2? 💖", () => {
+                                        // Done! Let the user interact with YES/NO
+                                    });
+                                });
+                            }, 1000);
+                        });
+                    }, 1000);
+                });
+            });
+        }, 500);
+    }, 1000);
+}
+
+// Start tour
+setTimeout(runTourSequence, 1000);
